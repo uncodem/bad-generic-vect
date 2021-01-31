@@ -7,6 +7,15 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#ifndef TEMPL_H_
+#define TEMPL_H_
+
+#define CAT(a, b) a##_##b
+#define TEMPL(x, y) CAT(x,y)
+#define t_(type, name) TEMPL(type, name)
+
+#endif
+
 #ifndef VECT_CONSTS
 #define VECT_CONSTS
 #define VECT_FACT 2
