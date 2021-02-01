@@ -63,12 +63,18 @@ VT(vector) VT(initp)(T *init) {
 	return VT(initnp)(init, sizeof(init));
 }
 
+VT(vector) VT(subs)(VT(vector) *base, size_t first, size_t len) {
+	VT(vector) ret = VT(initnp)(base->data+first, len);
+	
+	return ret;
+}
+
 void VT(append)(VT(vector) *vect, T elem) {
 	if (vect->data != NULL) {
 		if (vect->size + 1 >= vect->cap) {
 			vect->cap *= VECT_FACT;
 			vect->cap++;
-			vect->data = realloc(vect->data, vect->cap);
+			vect->data = realloc(vect->data, vect->cap*sizeof(T));
 		}
 		vect->data[vect->size++] = elem;
 	}
